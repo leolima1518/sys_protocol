@@ -14,7 +14,7 @@
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         //echo "Connected successfully";
-        $stmt = $conn->prepare("SELECT id_user FROM user WHERE email=:email AND senha=md5(:senha)");
+        $stmt = $conn->prepare("SELECT id_user FROM user WHERE email=:email AND senha=:senha");
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);
         $stmt->execute();
