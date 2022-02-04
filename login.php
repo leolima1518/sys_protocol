@@ -6,23 +6,17 @@
         $senha = $_POST['senha'];
 
         // 2. conexao com o db
-        $servername = "localhost";
-        $username = "root";
-        $password = "81855688lima";
+
         
         try {
-            $conn = new PDO("mysql:host=$servername;dbname=sistema_test", $username, $password);
-            // set the PDO error mode to exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            //echo "Connected successfully";
-            $stmt = $conn->prepare("SELECT id_user FROM user WHERE email=:email AND senha=:senha");
-            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-            $stmt->bindParam(':senha', $senha, PDO::PARAM_STR);
-            $stmt->execute();
+            include('conexao_db.php');
 
-            // set the resulting array to associative
-            $result = $stmt->fetchAll();
+            $consulta = $conn->prepare("SELECT id_user FROM user WHERE email=:email AND senha=:senha");
+            $consulta->bindParam(':email', $email, PDO::PARAM_STR);
+            $consulta->bindParam(':senha', $senha, PDO::PARAM_STR);
+            $consulta->execute();
+
+            $result = $consulta->fetchAll();
             $qtd_user = (count($result));
             if ($qtd_user == 1) {
 
