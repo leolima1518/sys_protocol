@@ -1,0 +1,68 @@
+             <?php foreach($r["pessoa"] as $p):?>
+                <tr>
+                    <td><?= $p["nome"]; ?> </td>
+                    <td><?= $p["nascimento"]; ?></td>
+                    <td><?= $p["cpf"]; ?></td>
+                    <td><?= $p["celular"]; ?></td>
+                    <td><?= $p["sexo"]; ?></td>
+
+                </tr>
+             <?php endforeach; ?>
+
+             if(count($rows) > 0){
+
+echo "L'usuari ja existeix";
+echo "<p><a href='registreUsuari.php'>Torna</a></p>";
+
+} else{
+    
+    INSERT INTO users (mail, password, role, name, created_at,forgotpass) VALUES ("p@gmail.com", "pepe","user", "pepito", current_Time,"forgotpass");
+    $user="admin";
+    $sqlinsert = 'INSERT INTO users (mail, password, role, name,forgotpass) VALUES (:mail, :passwordform,:usuari, :nomFormulari,:forgotpass)';
+    //$sql = 'SELECT  * FROM users';
+    $stmtinsertar = $con->prepare($sqlinsert);
+    // $stmt = $con->prepare("INSERT INTO users (mail, password, role, name, created_at,forgotpass) VALUES (:mail, :password,:user, :nomFormulari, :data,:forgotpass)");
+    $stmtinsertar->bindParam(':mail', $correuFormulari);
+    $stmtinsertar->bindParam(':password', $passwordFormulari);
+    $stmtinsertar->bindParam(':user', $user);
+    $stmtinsertar->bindParam(':nomFormulari', $nomFormulari);
+    //$stmt->bindParam(':data', $data);
+    $stmtinsertar->bindParam(':forgotpass', "forgotpass");
+
+INSERT INTO users (mail, password, role, name,forgotpass) VALUES ("hola@g,aoñ", "pepe","user", "pedro","forgot")
+*/
+try
+    { 
+        //$stmtinsertar->execute();
+        $stmt->execute(
+            array(':mail'=> "$correuFormulari",
+            ':passwordform'=>  "$passwordFormulari",
+            ':usuari'=>  "$user",
+            ':nomFormulari'=> "$nomFormulari",
+            ':forgotpass'=> "forgotpass")
+            );
+    }
+catch(PDOException $e)
+{
+    handle_sql_errors($selectQuery, $e->getMessage());
+}
+
+
+echo "S'ha creat l'usuari";
+//header('Location: '.'login.php');
+
+//        $stmt->close();
+
+
+} 
+
+
+
+
+<div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" required class="form-control" name="email" id="email" placeholder="Digite seu email.">
+        </div>
+        <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input type="password" required class="form-control" name="senha" id="senha" placeholder="Digite sua senha de 8 ou mais digitos.">
