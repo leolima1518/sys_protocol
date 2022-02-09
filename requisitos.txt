@@ -1,4 +1,4 @@
-Exercício de desenvolvimento de sistemas
+ Exercício de desenvolvimento de sistemas
 
 O desafio consiste em desenvolver uma versão reduzida e simplificada de um 
 sistema de atendimento ao contribuinte, que será utilizado pelo setor de 
